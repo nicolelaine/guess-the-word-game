@@ -83,5 +83,18 @@ const makeGuess = function (letter) {
         guessMessage.innerText = `Guess ${letter} was added to your guesses.`
         guessedLetters.push(letter);
         console.log(guessedLetters);
+        updateLetters();
     }
+};
+
+const updateLetters = function () {
+    //clear the existing content of letterGusses
+  letterGuesses.innerHTML = "";
+  guessedLetters.forEach(function (letter) {
+    const li = document.createElement("li");
+    //set the text content of the <li> element
+    li.innerHTML = letter;
+    //append the <li" to the letterGuesses element
+     letterGuesses.append(li);
+  }) 
 };
