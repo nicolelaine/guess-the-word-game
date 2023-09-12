@@ -114,4 +114,13 @@ const theProgress = function(guessedLetters) {
             }
         }
         wordProgress.innerText = updatedWord;
+        playerWon(updatedWord);
 }
+
+//fucntion to tell if the player won and to display a congratulatory message
+const playerWon = function (updatedWord) {
+   if (updatedWord === word.toUpperCase()) {
+         guessMessage.classList.add("win");
+         guessMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`
+   }
+};
