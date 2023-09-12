@@ -84,6 +84,7 @@ const makeGuess = function (letter) {
         guessedLetters.push(letter);
         console.log(guessedLetters);
         updateLetters();
+        theProgress(guessedLetters);
     }
 };
 
@@ -98,3 +99,19 @@ const updateLetters = function () {
      letterGuesses.append(li);
   }) 
 };
+
+//updates the word in progress on the screen
+const theProgress = function(guessedLetters) {
+  const wordUpper = word.toUpperCase();
+  const wordArray = wordUpper.split("")
+   let updatedWord = "";
+
+        for (const letter of wordArray) {
+            if (guessedLetters.includes(letter)) {
+                updatedWord += letter;
+            } else {
+                updatedWord += "●"
+            }
+        }
+        wordProgress.innerText = updatedWord;
+}
