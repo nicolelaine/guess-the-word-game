@@ -33,7 +33,7 @@ const wordUpdater = function (word) {
     const letters = word.split('');
     const displayWord = letters.map(function(letter) {
         return "●";
-    word.join();
+   // word.join();
     }).join('');
    wordProgress.innerText = displayWord;
 }
@@ -74,6 +74,7 @@ const guessChecker = function (input) {
     }
 };
 
+//function that deals with the letters being added to the array of gusses
 const makeGuess = function (letter) {
      //convert the input letter to uppercase
      letter = letter.toUpperCase();
@@ -83,11 +84,14 @@ const makeGuess = function (letter) {
         guessMessage.innerText = `Guess ${letter} was added to your guesses.`
         guessedLetters.push(letter);
         console.log(guessedLetters);
+        //call player guess to update the remaining guesses
+        playerGuess(letter)
         updateLetters();
         theProgress(guessedLetters);
     }
 };
 
+//function that creates the list of guesses
 const updateLetters = function () {
     //clear the existing content of letterGusses
   letterGuesses.innerHTML = "";
@@ -117,10 +121,33 @@ const theProgress = function(guessedLetters) {
         playerWon(updatedWord);
 }
 
-//fucntion to tell if the player won and to display a congratulatory message
+
+let remainingGuesses = 8;
+//function that keeps track of the number of guesses
+const playerGuess = function (guess) {
+    word = word.toUpperCase();
+       if (word.includes(guess)) {
+          guessMessage.innerText = `Correct, ${guess} is in the word!`;
+       } else {
+          guessMessage.innerText = `Sorry, ${guess} is not in the word!`;
+          remainingGuesses = remainingGuesses - 1;
+       } 
+    if (remainingGuesses === 0) {
+        guessMessage.innerText = `Sorry, game over. The word is ${word}!`;
+    } else if (remainingGuesses === 1) { 
+        displayGuesses.innerText = `You have 1 guess remaining!`;
+    }  else {
+        console.log("Remaining Guesses: " + remainingGuesses); // Debugging line
+       displayGuesses.innerText = `You have ${remainingGuesses} guesses remaining!`;
+    }
+}
+
+//fucntion to tell if the player won and to display a congratulatory messag
 const playerWon = function (updatedWord) {
    if (updatedWord === word.toUpperCase()) {
          guessMessage.classList.add("win");
-         guessMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`
+         guessMessage.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
    }
 };
+
+
