@@ -125,8 +125,8 @@ const theProgress = function(guessedLetters) {
 let remainingGuesses = 8;
 //function that keeps track of the number of guesses
 const playerGuess = function (guess) {
-    word = word.toUpperCase();
-       if (word.includes(guess)) {
+   const wordUpper = word.toUpperCase();
+       if (wordUpper.includes(guess)) {
           guessMessage.innerText = `Correct, ${guess} is in the word!`;
        } else {
           guessMessage.innerText = `Sorry, ${guess} is not in the word!`;
@@ -134,11 +134,13 @@ const playerGuess = function (guess) {
        } 
     if (remainingGuesses === 0) {
         guessMessage.innerText = `Sorry, game over. The word is ${word}!`;
+        remaining.innerText = ``; //remove the guess number for when the game is over
+
     } else if (remainingGuesses === 1) { 
-        displayGuesses.innerText = `You have 1 guess remaining!`;
+        displayGuesses.innerText = `1 guess`;
     }  else {
         console.log("Remaining Guesses: " + remainingGuesses); // Debugging line
-       displayGuesses.innerText = `You have ${remainingGuesses} guesses remaining!`;
+       displayGuesses.innerText = `${remainingGuesses} guesses`;
     }
 }
 
