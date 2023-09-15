@@ -23,12 +23,34 @@ const guessMessage = document.querySelector(".message");
 const playAgain = document.querySelector(".play-again");
 
 //placeholder word
-const word = "magnolia";
+let word = "";
 
 //emtpy array where the guesses from the players go
 const guessedLetters = [];
 
-//function that splits the array of magnolia into letters and then turns those into bullet points
+//sets the initial number of guesses
+let remainingGuesses = 8;
+
+//GLOBAL VARIABLES END HERE
+
+//function the grabs a random word from a list to guess
+const getWord = async function () {
+    const res = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
+    const words = await res.text();
+  // console.log(data);
+  //this splits the data (words) into an array so that we can then grab a random word
+    const wordArray = words.split("\n");
+  //Get a random index from the wordArray
+    const randomIndex = Math.floor(Math.random() * wordArray.length);
+  // Get a random word and trim it to remove whitespace
+     word = wordArray[randomIndex].trim()
+   //  console.log(word);  this will show the word in the console, which ruins the game!
+     wordUpdater(word);
+}
+//getWord(); this moves to after the wordUpdater function and gets called there instead
+
+
+//placeholder function that splits the array of magnolia into letters and then turns those into bullet points
 const wordUpdater = function (word) {
     const letters = word.split('');
     const displayWord = letters.map(function(letter) {
@@ -37,7 +59,8 @@ const wordUpdater = function (word) {
     }).join('');
    wordProgress.innerText = displayWord;
 }
-wordUpdater(word);
+//wordUpdater(word);  //this moves up to into at the bottom of the getWord function
+getWord();
 
 
 //event listener for when folks click on the guess button - it should show the value of what is typed in the console
@@ -104,7 +127,7 @@ const updateLetters = function () {
   }) 
 };
 
-//updates the word in progress on the screen
+//function that updates the word in progress on the screen
 const theProgress = function(guessedLetters) {
   const wordUpper = word.toUpperCase();
   const wordArray = wordUpper.split("")
@@ -122,7 +145,6 @@ const theProgress = function(guessedLetters) {
 }
 
 
-let remainingGuesses = 8;
 //function that keeps track of the number of guesses
 const playerGuess = function (guess) {
    const wordUpper = word.toUpperCase();
