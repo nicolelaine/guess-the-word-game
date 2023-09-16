@@ -182,25 +182,46 @@ const playerWon = function (updatedWord) {
 
 //function to start the game over from the start!
 const startOver = function () {
- guessButton.classList.add("hide"); //hide the guess button
- remaining.innerText = ``; //remove the guess number for when the game is over
- letterGuesses.innerHTML =  ``; //clear the unordered list where the guessed letters apppear
- playAgain.classList.remove("hide"); // show the play again button
- remainingGuesses = 8;
- displayGuesses.innerText = `${remainingGuesses} guesses`; // Update the display of remaining guesses with the initial value
+    //hide elements
+  guessButton.classList.add("hide"); //hide the guess button
+  remaining.classList.add("hide") //hide the guess number for when the game is over
+  letterGuesses.classList.add("hide") //clear the unordered list where the guessed letters apppear
+ 
+  //Show the play button again
+   playAgain.classList.remove("hide"); // show the play again button
 };
+
 
 //event listening so that the play again button resets the game to start over
 playAgain.addEventListener("click", function () {
-    guessMessage.classList.remove("win"); // Remove the "win" class if added
-    guessMessage.innerHTML = ``; // empty the message text
-    letterGuesses.innerHTML = ``; //empty the unordered list
-    remainingGuesses = 8;  //set guesses back to 8
-    guessedLetters = [];  //set guessedLetters global varaible back to an empty array
-    remaining.innerHTML = `You have <span>${remainingGuesses} guesses</span> remaining.`; //Populate the text of the span inside the paragraph where the remaining guesses display with the new amount of guesses.
-    displayGuesses.innerText = `${remainingGuesses} guesses`; // Update the display of remaining guesses with the initial value displayGuesses.innerText = `${remainingGuesses} guesses`; // Update the display of remaining guesses
-    guessButton.classList.remove("hide");  //show the guess button
-    letterGuesses.innerHTML = ``; //show the guessed letters
-    playAgain.classList.add("hide"); // hide the play again button
-    getWord(); // call the get word function to start the game over
+  // Remove the "win" class from the message element
+   guessMessage.classList.remove("win");
+
+  //Clear the message text and the unordered list
+   guessMessage.innerText = "";
+   letterGuesses.innerHTML = "";
+
+   //Reset the remaining guesses to the initial value (e.g., 8)
+    remainingGuesses = 8;
+
+   // Reset the guessedLetters array to an empty array
+    guessedLetters = [];
+
+    // Update the display of remaining guesses with the initial value
+     displayGuesses.innerText = `${remainingGuesses} guesses`;
+
+  //Show the Guess button
+    guessButton.classList.remove("hide");
+
+    //show the paragraph with the remaining guesses
+    remaining.classList.remove("hide");
+
+     //show the guessed letters
+    letterGuesses.classList.remove("hide");
+
+    //Hide the "Play Again" button
+    playAgain.classList.add("hide");
+
+  // Start a new game by calling the getWord() function
+   getWord();
 });
