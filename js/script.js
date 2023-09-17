@@ -44,7 +44,7 @@ const getWord = async function () {
     const randomIndex = Math.floor(Math.random() * wordArray.length);
   // Get a random word and trim it to remove whitespace
      word = wordArray[randomIndex].trim()
-    console.log(word);  //this will show the word in the console, which ruins the game!
+  //  console.log(word);  //this will show the word in the console, which ruins the game!
      wordUpdater(word);
 }
 //getWord(); this moves to after the wordUpdater function and gets called there instead
@@ -55,8 +55,7 @@ const wordUpdater = function (word) {
     const letters = word.split('');
     const displayWord = letters.map(function(letter) {
         return "●";
-   // word.join();
-    }).join('');
+    }).join(''); 
    wordProgress.innerText = displayWord;
 }
 //wordUpdater(word);  //this moves up to into at the bottom of the getWord function
@@ -107,7 +106,7 @@ const makeGuess = function (letter) {
         guessMessage.innerText = `Guess ${letter} was added to your guesses.`;
         guessedLetters.push(letter);
         console.log(guessedLetters);
-        //call player guess to update the remaining guesses
+        //call playerGuess to update the remaining guesses
         playerGuess(letter);
         updateLetters();
         theProgress(guessedLetters);
@@ -198,8 +197,8 @@ playAgain.addEventListener("click", function () {
    guessMessage.classList.remove("win");
 
   //Clear the message text and the unordered list
-   guessMessage.innerText = "";
-   letterGuesses.innerHTML = "";
+  guessMessage.innerText = "";
+  letterGuesses.innerHTML = "";
 
    //Reset the remaining guesses to the initial value (e.g., 8)
     remainingGuesses = 8;
